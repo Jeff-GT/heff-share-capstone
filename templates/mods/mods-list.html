@@ -1,0 +1,28 @@
+extends 'base.html'
+{% load static %}
+
+{% block title %}Upload{% endblock title %}
+
+{% block content %}
+<div>
+  <h1>Upload</h1>
+
+  <div class="list">
+    {% for mod in mods_list %}
+
+    <div class="list-item">
+      <a href="">
+        {% if model.image %}
+        <img src="{{ mod.image.url }}" alt="{{ mod.name }}">
+        {% endif %}
+        <h2>{{ mod.title }}</h2>
+        <p>{{ mod.description }}</p>
+      </a>  
+
+    {% endfor %}
+  </div>
+
+  
+</div>
+
+{% endblock content %}

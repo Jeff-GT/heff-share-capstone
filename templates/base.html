@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+  <header>
+    <!-- <nav>
+      <div class="navbar-left">
+        <a href="">[Logo Here]</a></div>
+      <div class="navbar-right">
+        <a href="">File Sharing</a>
+        <a href="">Games</a>
+        <form action="">
+          <input type="search" name="" id="" placeholder="Game/Mod Search">
+          <button><a href="">Search</a></button>
+        </form>
+      </div>
+    </nav> -->
+    <nav class="bg-blue-600 p-4 flex justify-between items-center relative">
+      <!-- Logo -->
+      <div class="text-white text-xl font-bold">MyLogo</div>
+      
+      <!-- File Sharing Link -->
+      <a href="#" class="text-white font-semibold">File Sharing</a>
+      
+      <!-- Search Bar with Dropdown -->
+      <div class="relative dropdown">
+          <button class="bg-white p-2 rounded">Search Options</button>
+          <ul class="dropdown-menu absolute mt-2 w-40">
+              <li><a class="dropdown-item" href="#">All</a></li>
+              <li><a class="dropdown-item" href="#">Images</a></li>
+              <li><a class="dropdown-item" href="#">Videos</a></li>
+              <li><a class="dropdown-item" href="#">Documents</a></li>
+          </ul>
+      </div>
+      <div class="flex items-center bg-white rounded-lg overflow-hidden">
+          <input type="text" class="p-2 outline-none" placeholder="Search...">
+          <button class="bg-blue-500 text-white px-4 py-2">Search</button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="">
+    
+    {% block content%}{% endblock content %}
+
+  </div>
+  
+
+</body>
+</html>
