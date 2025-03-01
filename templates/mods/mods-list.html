@@ -1,28 +1,75 @@
-extends 'base.html'
-{% load static %}
+{% extends 'base.html' %}
+
 
 {% block title %}Upload{% endblock title %}
 
+{% load static %}
+
 {% block content %}
-<div>
-  <h1>Upload</h1>
+
+{% if game %}
+  <style>
+    .mod-bg{
+      background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%), url('{{ game.image.url}}');
+       
+      background-size: cover;
+      background-repeat: no-repeat;
+      transition: max-height 0.1s ease-in-out;
+    }
+  </style>
+{% else %}
+  <style>
+    .mod-bg{
+      background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%), url('{% static 'img/Background.jpg' %}'); 
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      transition: max-height 0.5s ease-in-out;
+    }
+  </style>
+{% endif %}
+
+  <div class="mod-bg list-container ">
+
+
+  <h1>Mod List</h1>
 
   <div class="list">
     {% for mod in mods_list %}
+    
 
-    <div class="list-item">
-      <a href="">
-        {% if model.image %}
-        <img src="{{ mod.image.url }}" alt="{{ mod.name }}">
-        {% endif %}
-        <h2>{{ mod.title }}</h2>
-        <p>{{ mod.description }}</p>
-      </a>  
+      <div class="list-item">
+        <a href="{% url 'mod_detail' mod.game mod.id %}">
 
+          {% if mod.cover_image %}
+          <img src="{{ mod.cover_image.url }}" alt="{{ mod.name }}">
+          {% endif %}
+          <h2>{{ mod.title }}</h2>
+          <small>{{ mod.author }}</small>
+          <small>{{ mod.created_on.date}}</small>
+          
+          {% if mod.file %}
+            <a download target="_blank" href="{{ mod.file.url }}">Download</a>
+          {% endif %} 
+            <p>{{ mod.game }}</p>
+          {% for tag in mod.modtags.all %}
+            <div>{{ tag.name }}</div>
+          {% endfor %}
+        </a>
+        <form method="post" action="{% url 'mods_list' %}">
+           <!-- create a like and dislike button using my mod model -->
+          {% csrf_token %}
+          <input type="hidden" name="mod_id" value="{{ mod.id }}">
+          <button type="submit" name="rating" value="like">Like</button>
+          <button type="submit" name="rating" value="dislike">Dislike</button>  
+        </form>  
+        <small>{{ mod.rating }}</small>
+      </div>
+    
     {% endfor %}
   </div>
 
   
-</div>
+
 
 {% endblock content %}

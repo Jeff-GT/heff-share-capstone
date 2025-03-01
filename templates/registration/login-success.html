@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <H1>You're Logged in!</H1>
+
+  <small>Will Redirect you to the home Page shortly...</small>
+  <script>
+    setTimeout(function() {
+        window.location.href = "{% url 'home' %}";  // Redirect after 5 seconds
+    }, 3000);  // 5000ms = 5 seconds
+  </script>
+
+{% endblock %}

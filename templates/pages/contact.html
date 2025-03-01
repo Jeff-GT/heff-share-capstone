@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block content %} 
+
+  <div class="contact">                         
+    <h1>Contact Us</h1>
+    <p>Have a question or concern? Reach out to us!</p>
+    
+    {% if user.is_authenticated %}
+        <form action="" method="post">
+          {% csrf_token %}
+
+          <div>
+            <label for="username">Username</label>
+            {{ form.username }}
+          </div>
+          <div>
+            <label for="email">Email</label>
+            {{ form.email }}
+          </div>
+          <div>
+            <label for="message">Msg</label>
+            {{ form.message }}
+          </div>
+
+          <div>
+            <button>Send Message</button>
+          </div>
+        </form>
+    {% else %}
+      <p>Sadly, you're not logged in. Please log into your account or sign up if you dont have one yet.</p>
+    {% endif %}
+  </div>
+
+
+
+{% endblock content %}

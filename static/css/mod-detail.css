@@ -1,0 +1,125 @@
+.mod-detail {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px; 
+}
+
+.mod-title{
+  
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 350px;
+  
+  padding: 50px;
+  
+}
+
+.mod-description{
+  background-color: #31234b;
+}
+
+.mod-description pre{
+  white-space: pre-wrap;
+}
+
+.mod-images{
+  background-color: #021733;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;    
+  gap: 10px; 
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  
+}
+
+.mod-images img{
+  width: 200px;
+  height: auto;  /* Maintains aspect ratio */
+}
+.mod-images a:hover{
+   outline: solid 1px var(--primary-color-300);
+}
+.images-seemore{
+  outline: 0;
+}
+.images-seemore:hover{
+  outline: 0;
+}
+.mod-images a{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;  /* Centers images horizontally */
+}
+
+.download-container{
+  margin-top: 30px;
+}
+
+.download{
+  padding: 10px;
+  -webkit-box-shadow: 0px 0px 8px 5px rgba(229,252,255,1);
+  -moz-box-shadow: 0px 0px 8px 5px rgba(229,252,255,1);
+  box-shadow: 0px 0px 8px 5px rgba(72,131,138,1);
+}
+
+
+
+.box{
+  height: 33.33%;
+  width: 100%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  line-height: 50px;
+  height: 50px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+}
+
+.btn-three {
+  color: #00d9ff;
+  transition: all 0.5s;
+  position: relative;
+}
+.btn-three::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  -webkit-box-shadow: 0px 0px 8px 5px rgba(229,252,255,1);
+  -moz-box-shadow: 0px 0px 8px 5px rgba(229,252,255,1);
+  box-shadow: 0px 0px 8px 5px rgba(72, 131, 138, 0.39);
+  background-color: rgba(0, 204, 255, 0.589);
+  transition: all 0.3s;
+}
+.btn-three:hover::before {
+  opacity: 0 ;
+  transform: scale(0.5,0.5);
+}
+.btn-three::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border: 1px solid rgba(255,255,255,0.5);
+  transform: scale(1.2,1.2);
+}
+.btn-three:hover::after {
+  opacity: 1;
+  transform: scale(1,1);
+}

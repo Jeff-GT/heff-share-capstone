@@ -1,0 +1,49 @@
+.list-container {
+  width: 75%;
+  margin: 0 auto; /* Centers the container */
+  margin-top: 25px;
+  display: flex;
+  padding: 50px;
+  flex-direction: column;
+  align-items: center; /* Ensures content stays centered */
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* /* Responsive columns */
+  gap: 10px; /* Adds space between items */
+  max-width: 1500px; /* Prevents excessive stretching */
+  width: 100%; /* Ensures items fit dynamically */
+  justify-content: center; 
+}
+
+.list-item {
+  border: 1px solid #7599c2;
+  border-radius: 8px;
+  padding-bottom: 5px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,0.5354516806722689) 100%, rgba(0,0,0,0) 100%);
+  transition: background 0.2s ease-in-out, border 0.05s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.list-item img {
+  max-width: 100%;; /* Prevents images from being too large */
+  height: auto; /* Maintains aspect ratio */
+}
+
+.list-item:hover {
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,0.6643032212885154) 100%, rgba(0,0,0,0) 100%);
+  transform: scale(1.01); /* Slight zoom effect */
+}
+
+.upload-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}

@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("pages.urls")),
     path("mods/", include("mods.urls")),
+    path("users/", include("users.urls")),
+    path("users/", include("django.contrib.auth.urls")),
 ]
 
 #confdig to serve images

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ mod.title }}{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+
+
+<style>
+  .header-image {
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%), url('{{ mod.cover_image.url}}'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
+
+<div class="mod-detail">
+    
+      <div class="mod-title header-image " >
+        <h1>{{ mod.title }}</h1>
+        <small>
+          {% for tag in mod.modtags.all %}
+            {{ tag.name }}
+        
+          {% endfor %} |
+          
+          {{ mod.author }} |
+          
+          {{ mod.created_on }}
+        </small>
+      </div>
+
+      <div class="mod-images">
+        {% for record in mod.images.all|slice:"0:3" %}
+        <a href="{{ record.image.url }}" target="_blank"><img src="{{ record.image.url }}" alt="{{ mod.title }}"></a>
+        {% endfor %}
+
+        {% if mod.images.all|length > 3 %}
+          <a class="images-seemore" href="#">View More</a>
+        {% endif %}
+      </div>
+
+      <!-- <div class="download-container box-3"><a class="download btn btn-three" href="{{ mod.file.url}}"><span>Download</span></a></div>
+      <div class="mod-description"> -->
+
+        <div class="box-3">
+          <a href="{{ mod.file.url}}"><div class="btn btn-three">
+            <span>DOWNLOAD</span>
+          </div></a>
+        </div>
+        
+        <pre>{{ mod.description }}</pre>
+      </div>
+
+      
+
+
+</div>
+
+
+{% endblock content %}

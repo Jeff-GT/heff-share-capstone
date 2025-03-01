@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+  {% if user.is_authenticated %}
+    <H1>You're Already Logged in</H1>
+    <small>Will Redirect you to the home Page shortly...</small>
+    <script>
+      setTimeout(function() {
+          window.location.href = "{% url 'home' %}";  // Redirect after 5 seconds
+      }, 3000);  // 5000ms = 5 seconds
+  </script>
+  {% else %}
+    <h2>Login</h2>
+    <form method="post">
+      
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+  {% endif %}
+{% endblock %}

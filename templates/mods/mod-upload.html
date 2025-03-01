@@ -1,0 +1,27 @@
+ {% extends "base.html" %}
+ {% load static %}
+ 
+ {% block title %}Upload{% endblock title %}
+ 
+ {% block content %}
+ 
+ <h1>Mod Upload Page</h1>
+ 
+ <div>
+
+    <h1>Upload</h1>
+  <form action="" class="upload-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Upload</button>
+
+  
+
+
+  </form>
+
+
+
+ </div>
+ 
+ {% endblock content %}
