@@ -4,5 +4,10 @@ from .models import Support
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Support
-        fields = ['username', 'email', 'subject', 'message']
-        # fields = '__all__'
+        fields = '__all__'
+        widgets = {
+            'username': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'example@email.com'}),
+            'subject': forms.TextInput(attrs={'placeholder': 'Subject'}),
+            'message': forms.Textarea(),
+        }

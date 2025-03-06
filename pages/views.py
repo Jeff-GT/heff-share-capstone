@@ -14,7 +14,6 @@ def contact(request):
     if request.method == 'POST':
         #validate data and send email
         form = ContactForm(request.POST)
-
         if form.is_valid():
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
@@ -22,13 +21,24 @@ def contact(request):
             message = form.cleaned_data['message']
             print(f"Sending email From {email} with message: {message} from {username}")
 
-            # message_body = render_to_string('pages/contact.html', request.POST)
-            send_mail(subject, message, email, ['heffcontact@gmail.com'])
-            print({email})
+            message_body = render_to_string('pages/contact-content.html', {
+                'username': username,
+                'email': email,
+                'subject': subject,
+                'message': message,
+            })
+            send_mail(subject, message, email, ['heffcontact@gmail.com'], html_message=message_body)
     else:
-       form = ContactForm(initial={
-           'username': request.user.username,
-           'email': request.user.email,
-        })
+       if request.user.is_authenticated:
+           form = ContactForm(initial
+           = {
+               'username': request.user.username,
+               'email': request.user.email,
+           })
+       else:
+        form = ContactForm(initial={
+            'username': "Guest",
+            'email': "",
+            })
 
     return render(request, 'pages/contact.html', {'form': form})

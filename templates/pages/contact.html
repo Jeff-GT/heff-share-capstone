@@ -7,12 +7,12 @@
   <div class="contact">                         
     <h1>Contact Us</h1>
     <p>Have a question or concern? Reach out to us!</p>
-    {% if user.is_authenticated %}
+    <p>If you have an account, we recommend logging in</p>
         <form action="" method="post">
           {% csrf_token %}
 
           <div>
-            <label for="username">Username2</label>
+            <label for="username">Username</label>
             {{ form.username }}
           </div>
           <div>
@@ -33,9 +33,6 @@
             <button>Send Message</button>
           </div>
         </form>
-    {% else %}
-      <p>Sadly, you're not logged in. Please log into your account or sign up if you dont have one yet.</p>
-    {% endif %}
   </div>
 
 
