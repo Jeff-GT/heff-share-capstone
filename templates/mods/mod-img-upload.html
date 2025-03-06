@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Upload{% endblock title %}
+
+{% block content %}
+
+<h1>Mod Upload Page</h1>
+
+<div>
+
+   <h1>Image Upload</h1>
+   <form method="post" enctype="multipart/form-data" action="{% url 'upload_mod_images' game=mod.game.id pk=mod.id %}">
+   {% csrf_token %}
+   {{ form.as_p }}
+   <button type="submit">Upload</button>
+
+ 
+
+
+ </form>
+
+
+
+</div>
+
+{% endblock content %}

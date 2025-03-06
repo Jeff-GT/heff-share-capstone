@@ -7,6 +7,7 @@ class ContactForm(forms.Form):
           attrs={
             'placeholder':'example@email.com', 'type':'email'
           }
+
         ), 
       required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)

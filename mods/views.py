@@ -5,43 +5,44 @@ from .forms import UploadForm, RatingForm
 from django.urls import reverse_lazy
 
 
+
 class ModListView(ListView):
     template_name = 'mods/mods-list.html'
     model = Mod
     context_object_name = 'mods_list'
+    paginate_by = 5
 
     def get_queryset(self):
         # check for search
         search = self.request.GET.get('search-mod')
+        search_data = None
         if search:
             game = self.request.GET.get('game-selector')
             if  game and game != '0':
                 # search and game, return filtered
-                return Mod.objects.filter(title__icontains=search , game__id=game)            
+                search_data = Mod.objects.filter(title__icontains=search , game__id=game)            
             else:
-                return Mod.objects.filter(title__icontains=search)
+                search_data =  Mod.objects.filter(title__icontains=search)
 
         else:
             game = self.request.GET.get('game-selector')
             if game and game != '0':
                 # search and game, return filtered
-                return Mod.objects.filter(game__id=game) 
+                search_data = Mod.objects.filter(game__id=game) 
             else:
                     # no search, return all   
-                return Mod.objects.all()
+                search_data = Mod.objects.all()
         
 
-    def get_queryset(self):
         # show amount of like a mod has minus the dislikes
-        mods = Mod.objects.all()
-        for mod in mods:
+        for mod in search_data:
             like = mod.ratings.filter(rating_type='like').count()
             dislike = mod.ratings.filter(rating_type='dislike').count()
             mod.rating = like - dislike
         # Sorting at the bottom
-        def sort_by_rating(mod):
-            return -mod.rating
-        mods = sorted(mods, key=sort_by_rating)  # Ascending order
+        def sort_by_rating(search_data):
+            return -search_data.rating
+        mods = sorted(search_data, key=sort_by_rating)  # Ascending order
         return mods
     
 
@@ -76,18 +77,37 @@ class ModUploadView(CreateView):
     template_name = 'mods/mod-upload.html'
     model = Mod
     form_class = UploadForm
-    success_url = reverse_lazy('mod_list')
+    success_url = reverse_lazy('mods_list')
 
-    def upload_mod_images(request, game, pk):
+    def form_valid(self, form):
+        mod = form.save(commit=False)
+        mod.author = self.request.user
+        mod.cover_image = self.request.FILES.get('cover_image')  # Ensure file is properly assigned
+        mod.save()
+        form.save_m2m()  # Save ManyToMany fields
+
+        images = self.request.FILES.getlist('images')
+        for image in images:
+            ModImage.objects.create(mod=mod, image=image)
+        
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['mod_images'] = ModImage.objects.all()  # To display uploaded images
+        return context
+
+
+def upload_mod_images(request, game, pk):
         mod = Mod.objects.get(id=pk)
-
+        
         if request.method == 'POST':
             print(request.FILES)
             
-            files = request.FILES.getlist('images')  # Get multiple images
+            images = request.FILES.getlist('images')  # Get multiple images
 
-            for file in files:
-                ModImage.objects.create(mod=mod, image=file)  # Save each image
+            for image in images:
+                ModImage.objects.create(mod=mod, image=image)  # Save each image
             
             return redirect('mod_detail', game=mod.game, pk=mod.id)
 
@@ -95,6 +115,8 @@ class ModUploadView(CreateView):
             pass
 
         return render(request, 'mods/mod-upload.html', {'mod': mod})
+
+        
 
 class ModDetailView(DetailView):
     template_name = 'mods/mod-detail.html'

@@ -10,16 +10,19 @@
  <div>
 
     <h1>Upload</h1>
-  <form action="" class="upload-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button>Upload</button>
-
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <!-- Mod Upload Fields -->
+      {{ form.as_p }}
   
-
-
+      <!-- Image Upload Field -->
+      <label for="images">Upload Additional Images:</label>
+      <input type="file" name="images" multiple>
+  
+      <button type="submit">Upload Mod & Images</button>
   </form>
-
+  
 
 
  </div>

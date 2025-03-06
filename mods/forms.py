@@ -6,9 +6,12 @@ class UploadForm(forms.ModelForm):
         model = Mod
         fields = ['title', 'description','cover_image', 'file', 'game', 'modtags'] 
         widgets = {
-            'modtags': forms.CheckboxSelectMultiple()
+            'modtags': forms.CheckboxSelectMultiple(),
         }
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.required = True
 
 class RatingForm(forms.Form):
     RATING_CHOICES = [

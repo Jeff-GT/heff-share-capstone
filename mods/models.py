@@ -21,7 +21,7 @@ class Mod(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     game = models.ForeignKey('Game', on_delete=models.CASCADE, blank=True, null=True)  
     modtags = models.ManyToManyField('ModTag', blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mods', null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     def __str__(self):
         return self.title 
     

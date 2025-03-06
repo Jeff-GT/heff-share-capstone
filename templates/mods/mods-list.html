@@ -33,8 +33,12 @@
 
 
   <h1>Mod List</h1>
+  
+  
+
 
   <div class="list">
+
     {% for mod in mods_list %}
     
 
@@ -44,8 +48,10 @@
           {% if mod.cover_image %}
           <img src="{{ mod.cover_image.url }}" alt="{{ mod.name }}">
           {% endif %}
-          <h2>{{ mod.title }}</h2>
-          <small>{{ mod.author }}</small>
+          <div>
+            <h2>{{ mod.title }}</h2>
+            <small>{{ mod.author.username }}</small>
+          </div>
           <small>{{ mod.created_on.date}}</small>
           
           {% if mod.file %}
@@ -67,6 +73,32 @@
       </div>
     
     {% endfor %}
+
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; First</a>
+          <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+      <form id="pageSelectForm" method="GET">
+        <label for="page">Go to page:</label>
+        <select name="page" id="page" onchange="this.form.submit();">
+            {% for num in paginator.page_range %}
+                <option value="{{ num }}" {% if num == page_obj.number %}selected{% endif %}>
+                    {{ num }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">Next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+      {% endif %}
+  </div>
   </div>
 
   
