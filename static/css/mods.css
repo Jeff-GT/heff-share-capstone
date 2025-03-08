@@ -26,15 +26,15 @@
   padding-bottom: 5px;
   text-align: center;
   width: 100%;
+  max-width: 290px;
   box-sizing: border-box;
   background: rgb(0,0,0);
   background: linear-gradient(180deg, rgba(0,0,0,0.5354516806722689) 100%, rgba(0,0,0,0) 100%);
   transition: background 0.2s ease-in-out, border 0.05s ease-in-out, transform 0.1s ease-in-out;
 }
-
 .list-item img {
-  max-width: 100%;; /* Prevents images from being too large */
-  height: auto; /* Maintains aspect ratio */
+  max-width: 100%; /* Prevents images from being too large */
+  height: 160px; /* Maintains aspect ratio */
 }
 
 .list-item:hover {
@@ -79,31 +79,38 @@
 /******************************RATING******************************/
 
 .rating{
-  background-color: none;
+  background-color: #1d1d1d;
+  display: flex;
+  max-height: 50px;
+  justify-content: space-between;
+  align-items: center;
 }
 .rating button{
   padding: 0px;
   background-color: #1d1d1d;
   opacity: 0.60;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, scale 0.2s;
 }
 .rating img{
-  width: 60px;
+  width: 30px;
   height: 100%;
 }
 .rating button:hover{
   opacity: 1;
+  scale: 1.15;
 }
 
+.downvote{
+  padding-top: 15px;
+}
 .result{
-  background-color: #1d1d1d;
   display: flex;
   justify-content: center;
   font-size: 24px;
 }
 .result img{
-  width: 30px;
-  height: 100%;
+  width: 20px;
+  height: auto;
   margin-right: 10px;
 }
 .result p{

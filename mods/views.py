@@ -10,7 +10,7 @@ class ModListView(ListView):
     template_name = 'mods/mods-list.html'
     model = Mod
     context_object_name = 'mods_list'
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         # check for search

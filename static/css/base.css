@@ -22,6 +22,8 @@
 html, body{
   background-color: #101112;
   color: white;
+  margin: 0;
+  padding: 0;
 }
 
 ul, li{
@@ -50,11 +52,9 @@ nav{
   justify-content: space-between;
   align-items: center;
   background-color: #272929;
-  padding-top: 10px;
-  padding-bottom: 10px;
   
   position: sticky;
-  top: 0;
+  top: 0; 
   font-size: 1.3rem; 
   color: var(--primary-color-50);
 }

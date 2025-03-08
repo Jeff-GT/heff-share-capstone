@@ -93,18 +93,24 @@
         </a>
         <form class="rating" method="post" action="{% url 'mods_list' %}">
            <!-- create a like and dislike button using my mod model -->
-          {% csrf_token %}
-          <input type="hidden" name="mod_id" value="{{ mod.id }}">
-          <button type="submit" name="rating" value="like"><img src="{% static 'img/upvote.png' %}" alt=""></button>
-          <button type="submit" name="rating" value="dislike"><img src="{% static 'img/downvote.png' %}" alt=""></button>  
-        </form>  
-        <div class="result">
-          {% if mod.rating < 0 %}
-            <p class="bad-res"><img src="{% static 'img/upvote.png' %}" alt="">{{ mod.rating }}</p>
-          {% else %}
-            <p ><img src="{% static 'img/upvote.png' %}" alt="">{{ mod.rating }}</p>
-          {% endif %}
-        </div>
+          
+          
+            {% csrf_token %}
+
+            <input type="hidden" name="mod_id" value="{{ mod.id }}">
+            <button type="submit" name="rating" value="like"><img src="{% static 'img/upvote.png' %}" alt=""></button>
+            <div class="result">
+              {% if mod.rating < 0 %}
+                <p class="bad-res"><img src="{% static 'img/upvote.png' %}" alt="">{{ mod.rating }}</p>
+              {% else %}
+                <p ><img src="{% static 'img/upvote.png' %}" alt="">{{ mod.rating }}</p>
+              {% endif %}
+            </div>
+
+            <button type="submit" name="rating" value="dislike" style="padding-top: 5px;"><img src="{% static 'img/downvote.png' %}" alt=""></button>  
+        
+      </form>  
+        
       </div>
     
     {% endfor %}
