@@ -1,0 +1,15 @@
+{
+    "name": "C++ Codespace",
+    "image": "mcr.microsoft.com/vscode/devcontainers/cpp:latest",
+    "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cmake-tools"
+    ],
+    "settings": {
+        "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+        "C_Cpp.intelliSenseEngine": "Default"
+    },
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y build-essential",
+    "remoteUser": "vscode"
+}
