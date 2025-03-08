@@ -20,7 +20,7 @@
 }
 
 html, body{
-  background-color: var(--background-color);
+  background-color: #101112;
   color: white;
 }
 
@@ -49,7 +49,7 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--secondary-color-900);
+  background-color: #272929;
   padding-top: 10px;
   padding-bottom: 10px;
   
@@ -59,13 +59,61 @@ nav{
   color: var(--primary-color-50);
 }
 
+.support-style, .mod-style {
+  position: relative;
+  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: inline-block; /* Keeps the element's layout intact */
+  transition: color 0.3s ease; /* Add smooth transition for font weight */
+}
+
+.support-style button, .mod-style button {
+  position: relative;
+  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.mod-style {
+  padding-left: 88px;
+}
+
+.support-style::before,
+.mod-style::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 5px;
+  background-color: var(--primary-color-300);
+  transition: width 0.3s ease, left 0.3s ease; /* Add smooth transition for width and left */
+}
+
+.support-style:hover::before,
+.mod-style:hover::before {
+  width: 100%;
+  left: 0; /* Expand underline */
+}
+
+.support-style:hover,
+.mod-style:hover {
+  color: var(--primary-color-300)  ;
+}
+
 
 .logo{
   width: 10%;
   margin-left: 30px;
+  transition: transform 0.1s;
 }
 .logo img{
   width: 80px;
+  
+}
+.logo:hover{
+  transform: scale(1.05);
 }
 
 .right-nav{
@@ -179,7 +227,13 @@ nav{
   max-height: 500px; /* Set a max-height when opening */
 }
 
-
+.search-bar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-right: 30px;
+}
 
 .logged-in{
  display: flex;

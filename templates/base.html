@@ -20,16 +20,20 @@
   
     <nav class="bg-blue-600 p-4 flex justify-between items-center relative">
       <!-- Logo -->
-      <div class="logo">
-        <a href="{% url 'home' %}" class="flex items-center">
-          <img src="{% static 'img/LOGO.png' %}" alt="">
+      <div class="logo nav-select">
+        <a href="{% url 'home' %}" class="flex items-center support-style">
+          <img c src="{% static 'img/LOGO.png' %}" alt="">
         </a>
       </div>
 
 
       <div class="left-nav">
         <div class="dropdown">
-          <a href="{% url 'mods_list' %}">Mods</a>
+          <a href="{% url 'mods_list' %}" class="mod-style-link">
+            <div class="mod-style">
+              Mods
+            </div>
+          </a>
 
         
           
@@ -40,10 +44,14 @@
             {% endfor %}
           </div>
         </div>
-        <!-- File Sharing Link -->
-        <a href="#">File Sharing</a>
         <!-- Contact Us -->
-        <a href="{% url 'contact' %}">Support</a>
+        <div class="nav-select">
+          <a class="support-style-link" href="{% url 'contact' %}"><div class="support-style">
+            
+            Support
+            
+          </div></a>
+        </div>
       </div>
       
       <!-- Search Bar with Dropdown -->
@@ -98,6 +106,6 @@
 
   </div>
   
-
+  
 </body>
 </html>

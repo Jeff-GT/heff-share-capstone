@@ -35,7 +35,39 @@
   <h1>Mod List</h1>
   
   
+  <div class="pagination">
+    <div class="page-navigator">
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; First</a>
+          <a class="prev" href="?page={{ page_obj.previous_page_number }}">Prev</a>
+      {% endif %}
+          
+      {% if page_obj.has_next and page_obj.has_previous %}
+        <small>|</small>
+      {% endif %}
 
+      {% if page_obj.has_next %}
+            <a class="next" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+      {% endif %}
+    </div>
+
+    <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    <form id="pageSelectForm" method="GET">
+      <label for="page">Go to page:</label>
+      <select name="page" id="page" onchange="this.form.submit();">
+          {% for num in paginator.page_range %}
+              <option value="{{ num }}" {% if num == page_obj.number %}selected{% endif %}>
+                  {{ num }}
+              </option>
+          {% endfor %}
+      </select>
+    </form>
+
+    
+  </div>
 
   <div class="list">
 
@@ -50,58 +82,70 @@
           {% endif %}
           <div>
             <h2>{{ mod.title }}</h2>
-            <small>{{ mod.author.username }}</small>
+            <small>Author: {{ mod.author.username }}</small>
           </div>
           <small>{{ mod.created_on.date}}</small>
           
-          {% if mod.file %}
-            <a download target="_blank" href="{{ mod.file.url }}">Download</a>
-          {% endif %} 
             <p>{{ mod.game }}</p>
           {% for tag in mod.modtags.all %}
             <div>{{ tag.name }}</div>
           {% endfor %}
         </a>
-        <form method="post" action="{% url 'mods_list' %}">
+        <form class="rating" method="post" action="{% url 'mods_list' %}">
            <!-- create a like and dislike button using my mod model -->
           {% csrf_token %}
           <input type="hidden" name="mod_id" value="{{ mod.id }}">
-          <button type="submit" name="rating" value="like">Like</button>
-          <button type="submit" name="rating" value="dislike">Dislike</button>  
+          <button type="submit" name="rating" value="like"><img src="{% static 'img/upvote.png' %}" alt=""></button>
+          <button type="submit" name="rating" value="dislike"><img src="{% static 'img/downvote.png' %}" alt=""></button>  
         </form>  
-        <small>{{ mod.rating }}</small>
+        <div class="result">
+          {% if mod.rating < 0 %}
+            <p class="bad-res"><img src="{% static 'img/upvote.png' %}" alt="">{{ mod.rating }}</p>
+          {% else %}
+            <p ><img src="{% static 'img/upvote.png' %}" alt="">{{ mod.rating }}</p>
+          {% endif %}
+        </div>
       </div>
     
     {% endfor %}
 
-    <div class="pagination">
+    
+
+  </div>
+
+  <div class="pagination pagination-bottom">
+    <div class="page-navigator">
       {% if page_obj.has_previous %}
           <a href="?page=1">&laquo; First</a>
-          <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          <a class="prev" href="?page={{ page_obj.previous_page_number }}">Prev</a>
       {% endif %}
-
-      <span class="current">
-          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-      </span>
-      <form id="pageSelectForm" method="GET">
-        <label for="page">Go to page:</label>
-        <select name="page" id="page" onchange="this.form.submit();">
-            {% for num in paginator.page_range %}
-                <option value="{{ num }}" {% if num == page_obj.number %}selected{% endif %}>
-                    {{ num }}
-                </option>
-            {% endfor %}
-        </select>
-    </form>
+          
+      {% if page_obj.has_next and page_obj.has_previous %}
+        <small>|</small>
+      {% endif %}
 
       {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">Next</a>
-          <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+            <a class="next" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
       {% endif %}
-  </div>
-  </div>
+    </div>
 
-  
+    <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    <form id="pageSelectForm" method="GET">
+      <label for="page">Go to page:</label>
+      <select name="page" id="page" onchange="this.form.submit();">
+          {% for num in paginator.page_range %}
+              <option value="{{ num }}" {% if num == page_obj.number %}selected{% endif %}>
+                  {{ num }}
+              </option>
+          {% endfor %}
+      </select>
+    </form>
+
+    
+  </div>  
 
 
 {% endblock content %}

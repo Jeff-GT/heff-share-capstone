@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
-from .models import Mod, Game, ModImage
+from .models import Mod, Game, ModImage, Rating
 from .forms import UploadForm, RatingForm
 from django.urls import reverse_lazy
 
@@ -135,3 +135,4 @@ class ModDetailView(DetailView):
         if Mod.status.name != "":
             return True
         
+

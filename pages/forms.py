@@ -10,4 +10,4 @@ class ContactForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'placeholder': 'example@email.com'}),
             'subject': forms.TextInput(attrs={'placeholder': 'Subject'}),
             'message': forms.Textarea(),
-        }
+        }   
